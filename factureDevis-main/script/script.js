@@ -145,6 +145,14 @@ function genererDocument() {
     var montantTVA = montantTotalHT * (tauxTVA / 100);
     var montantTotalTTC = montantTotalHT + montantTVA;
 
+    var dateActuelle = new Date();
+
+    // Afficher la date formatée
+    console.log(dateFormatee);
+
+    var dateActuelle = new Date();
+    var dateFormatee = dateActuelle.toLocaleDateString();
+
     var nomEntreprise = document.getElementById('nomEntreprise').value;
     var adresseEntreprise = document.getElementById('adresseEntreprise').value;
     var codePostalEntreprise = document.getElementById('codePostalEntreprise').value;
@@ -156,12 +164,13 @@ function genererDocument() {
     var villeClient = document.getElementById('villeClient').value;
     var numeroSiretClient = document.getElementById('numeroSiretClient').value;
 
-    var titreDocument = typeDocument.charAt(0).toUpperCase() + typeDocument.slice(1) + " - Référence: " + referenceDocument;
+    var titreDocument = typeDocument.charAt(0).toUpperCase() + typeDocument.slice(1) + ':' + "\n Référence : " + referenceDocument;
 
     var documentDefinition = {
         pageMargins: [40, 60, 40, 60],
         content: [{
             text: titreDocument,
+            decoration: 'underline',
             style: 'header',
             alignment: 'center',
             fontSize: 18,
@@ -174,6 +183,13 @@ function genererDocument() {
             fit: [100, 100],
             background: 'black',
             margin: [0, 0, 0, 20]
+        },
+        {
+            text: 'Date du document: ' + dateFormatee, // Ajouter la date actuelle dans le document
+            alignment: 'right', // Aligner le texte à droite
+            decoration: 'underline', // Souligner le texte
+            background: '#CCCCCC', // Couleur de fond en gris (par exemple)
+            margin: [0, 10]
         },
         {
             columns: [{
