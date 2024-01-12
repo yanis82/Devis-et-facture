@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Générateur de document</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="CSS/style.css">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-T3c6CoI‌​i6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2‌​MPK8M2HN" crossorigin‌​="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+  <div class="header bg-light-blue "
+    style="text-transform: uppercase;  text-shadow: 3px 3px 3px #7d7f80;  font-weight: bold;">
+    <i class="bi bi-file-earmark-text" style="font-size: 6em;"></i>
+    <h1>Devis&factures générateur</h1>
+  </div>
+  <div class="container">
+    <!-- Informations sur l'entreprise -->
+    <h3>Informations sur l'entreprise</h3>
+    <label for="nomEntreprise">Nom de l'entreprise :</label>
+    <input type="text" id="nomEntreprise"><br>
+
+    <label for="adresseEntreprise">Adresse de l'entreprise :</label>
+    <input type="text" id="adresseEntreprise"><br>
+
+    <label for="codePostalEntreprise">Code postal de l'entreprise :</label>
+    <input type="text" id="codePostalEntreprise" pattern="[0-9]*"><br>
+
+    <label for="villeEntreprise">Ville de l'entreprise :</label>
+    <input type="text" id="villeEntreprise"><br>
+
+    <!-- Logo de l'entreprise -->
+    <label for="logoEntreprise">Logo de l'entreprise :</label>
+    <input type="file" id="logoEntreprise"><br>
+
+    <label for="numeroSiret">Numéro de SIRET :</label>
+    <input type="text" id="numeroSiret" pattern="[0-9]*"><br>
+    <br>
+    <!-- Informations sur le client -->
+    <h3>Informations sur le client</h3>
+    <label for="nomClient">Nom du client :</label>
+    <input type="text" id="nomClient"><br>
+
+    <label for="adresseClient">Adresse du client :</label>
+    <input type="text" id="adresseClient"><br>
+
+    <label for="codePostalClient">Code postal du client :</label>
+    <input type="text" id="codePostalClient" pattern="[0-9]*"><br>
+
+    <label for="villeClient">Ville du client :</label>
+    <input type="text" id="villeClient"><br>
+
+    <!-- Autres informations sur le client -->
+    <label for="numeroSiretClient">Numéro de SIRET du client :</label>
+    <input type="text" id="numeroSiretClient" pattern="[0-9]*"><br>
+    <br>
+    <!-- Choix du document (facture ou devis) et référence -->
+    <h3>Choix du document</h3>
+    <div class="alert">
+    <label for="facture">Facture</label>
+    <input type="radio" id="facture" name="typeDocument" value="facture">
+    <label for="devis">Devis</label>
+    <input type="radio" id="devis" name="typeDocument" value="devis"><br>
+  </div>
+
+    <label for="referenceDocument">Référence du document :</label>
+    <input type="text" id="referenceDocument"><br>
+
+    <label for="tva">Taux de TVA (%) :</label>
+    <select id="tva" name="tva">
+      <option value="20">20 %</option>
+      <option value="10">10 %</option>
+      <option value="5.5">5.5 %</option>
+      <option value="2.1">2.1 %</option>
+      <option value="10.5">10.5 %</option>
+      <option value="0">0 %</option>
+    </select>
+
+    <br><br>
+    <!-- Produits -->
+    <h3>Produits</h3>
+    <label for="titreProduit">Titre du Produit :</label>
+    <input type="text" id="titreProduit"><br>
+
+    <label for="prix">Prix :</label>
+    <input type="text" id="prix" pattern="[0-9]*"><br>
+
+    <label for="quantite">Quantité :</label>
+    <input type="text" id="quantite" pattern="[0-9]*"><br>
+
+    <!-- Champ Référence ajouté -->
+    <label for="referenceProduit">Référence du produit :</label>
+    <input type="text" id="referenceProduit"><br>
+
+    <div class="input-container">
+      <label for="descriptif">Descriptif :</label>
+      <textarea id="descriptif"></textarea>
+    </div>
+
+    <button onclick="ajouterProduit()">Ajouter Produit</button><br><br>
+    <br>
+    <!-- Liste des Produits -->
+    <h3>Liste des Produits</h3>
+    <table style="width: 100%;">
+      <thead>
+        <tr>
+          <b>
+            <th>Référence</th>
+            <th>Titre du Produit</th>
+            <th>Prix</th>
+            <th>Descriptif</th>
+            <th>Quantité</th>
+            <th>Actions</th><!-- Colonne pour le bouton Supprimer -->
+          </b>
+        </tr>
+      </thead>
+      <tbody id="listeProduits">
+      </tbody>
+    </table>
+
+    <br>
+
+    <!-- Tableau pour le Montant Total HT, Montant TVA, et Montant Total TTC -->
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th></th>
+          <th>Montant</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> Total HT</td>
+          <td id="montantTotalHT">0 €</td>
+        </tr>
+        <tr>
+          <td> TVA (<span id="tvaPercentage">20</span>%)</td>
+          <td id="montantTVA">0 €</td>
+        </tr>
+        <tr>
+          <td> Total TTC</td>
+          <td id="montantTotalTTC">0 €</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <br>
+    <!-- Générer le document -->
+    <button onclick="genererDocument()">Générer le document PDF</button>
+  </div>
+  <footer>
+
+    <table style="border: none;">
+      <tr>
+
+
+      </tr>
+    </table>
+  </footer>
+  <script src="script/script.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.70/vfs_fonts.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
