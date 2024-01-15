@@ -163,6 +163,9 @@ function genererDocument() {
     var codePostalClient = document.getElementById('codePostalClient').value;
     var villeClient = document.getElementById('villeClient').value;
     var numeroSiretClient = document.getElementById('numeroSiretClient').value;
+    var modePaiement = document.getElementById('modePaiement').value;
+    var tel = document.getElementById('tel').value;
+    var portable = document.getElementById('portable').value;
 
     var titreDocument = typeDocument.charAt(0).toUpperCase() + typeDocument.slice(1) + ':' + "\n Référence : " + referenceDocument;
 
@@ -190,7 +193,7 @@ function genererDocument() {
             decoration: 'underline', // Souligner le texte
             background: '#CCCCCC', // Couleur de fond en gris (par exemple)
             margin: [0, 10]
-        },
+        }, 
         {
             columns: [{
                 width: '*',
@@ -204,13 +207,17 @@ function genererDocument() {
                 {
                     text: 'Code postal : ' + codePostalEntreprise + '\n'
                 },
-                {
+                { 
                     text: 'Ville : ' + villeEntreprise + '\n'
                 },
                 {
                     text: 'Numéro de SIRET: ' + numeroSiret + '\n'
+                },
+                {
+                    text: '\n'+ 'Tel : '+tel +' '+ '- '+'Port : ' +portable 
                 }
                 ]
+    
             },
             {
                 width: '*',
@@ -279,6 +286,7 @@ function genererDocument() {
                                 widths: '30%',
                                 lineHeight: 1, // Pour forcer le texte du prix sur une seule ligne
                             }
+                            
                         ];
                     })
                 ),
@@ -316,7 +324,12 @@ function genererDocument() {
             fontSize: 16,
             alignment: 'right',
             margin: [0, 10],
-        }
+        },
+        {
+            text: 'Mode de paiement: ' + modePaiement + '\n'+'\n',
+            alignment: 'left',
+            margin: [0, 10],
+        },
             ,
         {
             text: '', // Espace vide pour la séparation
@@ -335,6 +348,7 @@ function genererDocument() {
             }
             ]
         }
+        
         ],
         styles: {
             header: {
