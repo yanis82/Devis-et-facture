@@ -1,9 +1,9 @@
+<!DOCTYPE html>
+<html lang="en">
 
-  <!DOCTYPE html>
-  <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Générateur de document</title>
 
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css">
@@ -35,6 +35,14 @@
     <label for="villeEntreprise">Ville de l'entreprise :</label>
     <input type="text" id="villeEntreprise"><br>
 
+    <label for="modePaiement">Mode de paiement :</label>
+    <input type="text" id="modePaiement"><br>
+
+    <label for="tel">Numéro de télephone :</label>
+    <input type="text" id="tel"><br>
+
+    <label for="portable">Portable :</label>
+    <input type="text" id="portable"><br>
     <!-- Logo de l'entreprise -->
     <label for="logoEntreprise">Logo de l'entreprise :</label>
     <input type="file" id="logoEntreprise"><br>
@@ -63,11 +71,11 @@
     <!-- Choix du document (facture ou devis) et référence -->
     <h3>Choix du document</h3>
     <div class="alert">
-    <label for="facture">Facture</label>
-    <input type="radio" id="facture" name="typeDocument" value="facture">
-    <label for="devis">Devis</label>
-    <input type="radio" id="devis" name="typeDocument" value="devis"><br>
-  </div>
+      <label for="facture">Facture</label>
+      <input type="radio" id="facture" name="typeDocument" value="facture">
+      <label for="devis">Devis</label>
+      <input type="radio" id="devis" name="typeDocument" value="devis"><br>
+    </div>
 
     <label for="referenceDocument">Référence du document :</label>
     <input type="text" id="referenceDocument"><br>
